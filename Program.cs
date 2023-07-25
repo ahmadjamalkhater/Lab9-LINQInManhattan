@@ -42,12 +42,12 @@ namespace Lab9_LINQInManhattan
             Console.WriteLine($"***************************************************************************************************************\n");
 
             // 5. Rewrite at least one of these questions only using the opposing method
-            Console.WriteLine("5. Rewrite at least one of these questions only using the opposing method (example: Use LINQ Query statements instead of LINQ method calls and vice versa.\n)");
-            var rewrittenQuery = (from f in root.features
-                                  select f.properties?.neighborhood)
-                                .Where(n => !string.IsNullOrEmpty(n))
-                                .Distinct()
-                                .ToList();
+            Console.WriteLine("5. Rewrite at least one of these questions only using the opposing method (example: Use LINQ method calls instead of LINQ Query statements and vice versa).\n");
+            var rewrittenQuery = root.features
+                .Select(f => f.properties?.neighborhood)
+                .Where(n => !string.IsNullOrEmpty(n))
+                .Distinct()
+                .ToList();
             Console.WriteLine($"********************Rewritten Query ({rewrittenQuery.Count} neighborhoods)********************\n");
             rewrittenQuery.ForEach(Console.WriteLine);
         }
